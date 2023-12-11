@@ -9,13 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(.white)
+            Rectangle()
+                .fill(.pink)
+            Rectangle()
+                .fill(.yellow)
+            Rectangle()
+                .fill(.black)
+            
         }
-        .padding()
+        .padding(0)
+    
     }
 }
 
