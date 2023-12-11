@@ -8,22 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(.white)
-            Rectangle()
-                .fill(.pink)
-            Rectangle()
-                .fill(.yellow)
-            Rectangle()
-                .fill(.black)
-            
-        }
-        .padding(0)
+    @State private var offset: CGSize = .zero
     
+    var body: some View {
+        ZStack {
+            VStack  (spacing:0) {
+                Color.white
+                    .edgesIgnoringSafeArea(.all)
+                
+                Color.pink
+                
+                Color.yellow
+                
+                Color.black
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            
+            
+            Rectangle()
+                .fill(Color.white)
+                .frame(width: 100, height: 100)
+                .offset(offset)
+                .blendMode(.exclusion)
+                .gesture(DragGesture()
+                    .onChanged { value in
+                        self.offset = value.translation
+                    }
+                    .onEnded { _ in
+                        self.offset = .zero
+                    }
+                )
+        }
     }
 }
+
 
 #Preview {
     ContentView()
