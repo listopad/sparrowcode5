@@ -8,37 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var offset: CGSize = .zero
+    @State private var rectangleCornerRadius: CGFloat = 12
+    @State private var position: CGSize = .zero
+    
     
     var body: some View {
         ZStack {
             VStack  (spacing:0) {
                 Color.white
-                    .edgesIgnoringSafeArea(.all)
-                
                 Color.pink
-                
                 Color.yellow
-                
                 Color.black
-                    .edgesIgnoringSafeArea(.all)
             }
+            .edgesIgnoringSafeArea(.all)
             
             
-            
-            Rectangle()
-                .fill(Color.white)
-                .frame(width: 100, height: 100)
-                .offset(offset)
-                .blendMode(.exclusion)
-                .gesture(DragGesture()
+            ZStack {
+                RoundedRectangle(cornerRadius: rectangleCornerRadius)
+                    .fill(Color.white)
+                    .blendMode(.difference)
+                
+                RoundedRectangle(cornerRadius: rectangleCornerRadius)
+                    .fill(Color.white)
+                    .blendMode(.color)
+                
+                RoundedRectangle(cornerRadius: rectangleCornerRadius)
+                    .fill(Color.white)
+                    .blendMode(.overlay)
+                
+                RoundedRectangle(cornerRadius: rectangleCornerRadius)
+                    .fill(Color.black)
+                    .blendMode(.overlay)
+                
+            }
+            .frame(width: 100, height: 100)
+            .offset(position)
+            .gesture(
+                DragGesture()
                     .onChanged { value in
-                        self.offset = value.translation
+                        self.position = value.translation
                     }
-                    .onEnded { _ in
-                        self.offset = .zero
+                    .onEnded { value in
+                        self.position = .zero
                     }
-                )
+            )
         }
     }
 }
