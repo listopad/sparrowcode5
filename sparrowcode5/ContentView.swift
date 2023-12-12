@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var rectangleCornerRadius: CGFloat = 12
+    @State private var rectangleCornerRadius: CGFloat = 14
     @State private var position: CGSize = .zero
     
     
